@@ -29,3 +29,8 @@
 .metadata/.plugins/org.eclipse.jdt.core/externalLibsTimeStamps
 *.properties
 *.resources
+*.launch
+*.xmi
+.metadata/.plugins/org.eclipse.jdt.core/nonChainingJarsCache
+.metadata/.plugins/org.eclipse.jdt.core/externalFilesCache
+.metadata/.plugins/org.eclipse.jdt.core/assumedExternalFilesCache
