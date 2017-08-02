@@ -10,3 +10,10 @@ Try to use FirefoxDeveloperEdition to edit and debug .html, .js files ...
 And .html file can also be open in Eclipse, but How To DEBUG??? <TO BE DONE>
 
 Learning JavaScript(JS) Tutorial still... Wrote some toy-alike .html .js at the same time.
+
+7.31-8.2: 
+
+Basic of JS, Progress Bar at JSFunction...
+
+(8.1:) Progress Bar at ERRORS(TO BE DONE);
+8.2: Finished JS Tutorial(Basic Part);  and Finished JS Objects section( with some notes) 
