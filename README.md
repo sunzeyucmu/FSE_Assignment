@@ -17,3 +17,11 @@ Basic of JS, Progress Bar at JSFunction...
 
 (8.1:) Progress Bar at ERRORS(TO BE DONE);
 8.2: Finished JS Tutorial(Basic Part);  and Finished JS Objects section( with some notes) 
+
+8.3:
+
+Finished JS Functions Section; 
+
+Start to attend the online courses(video + slides + chanllenge(practice)) on CodeSchool.
+
+Progress Bar at Level 2...
