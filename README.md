@@ -25,3 +25,8 @@ Finished JS Functions Section;
 Start to attend the online courses(video + slides + chanllenge(practice)) on CodeSchool.
 
 Progress Bar at Level 2...
+
+8.4:
+Should Learn JQuery Tomorrow!!!
+
+Node.js, Progress Bar at Level 6.
