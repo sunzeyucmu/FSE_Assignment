@@ -30,3 +30,11 @@ Progress Bar at Level 2...
 Should Learn JQuery Tomorrow!!!
 
 Node.js, Progress Bar at Level 6.
+
+8.5: 
+
+JQuery Is SOOOOOOO Important;
+
+Finished Node.js tutorial&chanllenge on CodeSchool;
+
+Express.js tutorial Progress Bar at level 4...

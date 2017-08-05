@@ -34,3 +34,5 @@
 .metadata/.plugins/org.eclipse.jdt.core/nonChainingJarsCache
 .metadata/.plugins/org.eclipse.jdt.core/externalFilesCache
 .metadata/.plugins/org.eclipse.jdt.core/assumedExternalFilesCache
+FSE_ChatRoom/.DS_Store
+FSE_ChatRoom/src/.DS_Store
