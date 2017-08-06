@@ -38,3 +38,8 @@ JQuery Is SOOOOOOO Important;
 Finished Node.js tutorial&chanllenge on CodeSchool;
 
 Express.js tutorial Progress Bar at level 4...
+
+8.6 :
+Finished Express.js Tutorial;
+
+JQuery tutorial Progress Bar at level 4.5
