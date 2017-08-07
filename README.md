@@ -43,3 +43,7 @@ Express.js tutorial Progress Bar at level 4...
 Finished Express.js Tutorial;
 
 JQuery tutorial Progress Bar at level 4.5
+
+8.7:
+Finished JQuery tutorial & JQuery@AJAX,Plugin,Promise tutorial...
+Time to CODE Tomorrow!

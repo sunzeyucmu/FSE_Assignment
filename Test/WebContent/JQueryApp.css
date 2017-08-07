@@ -1,0 +1,14 @@
+@CHARSET "UTF-8";
+.ticket{
+	display : none;
+}
+.comments{
+	display : none;
+}
+.highlighted{
+	background-color : #563;
+	border-color : 1px solid #967;
+}
+.highlighted .comments{
+	display : none;
+}

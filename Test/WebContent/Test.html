@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>External JavaScript</h2>
+<script>
+var person = "John Doe", 
+carName = "Volvo", 
+price = 200;
+//declare many variables in one statement; And a declaration can span multiple lines: 
+//A variable declared without a value will have the value UNDEFINED.
+</script>
+<p id="demo">A Paragraph.</p>
+
+<button type="button" onclick="myFunction()">Try it</button>
+
+<p>(myFunction is stored in an external file called "myScript.js")</p>
+
+<p id="demo1"></p>
+<script src="myScript.js">/*Loading JavaScript in HTML*/</script>   
+
+<script>
+document.getElementById("demo1").innerHTML = 5 + 6; //String Add Example
+</script>
+
+<script>
+document.write(5+6);   //doucument.write() method should only used for testing
+</script>
+
+<button type="button" onclick="window.alert(5 + 6)">print </button> 
+
+<script>
+console.log(666666); //use the console.log() method to display data.
+</script>
+
+<p id="demo2"></p>
+
+<script>
+document.getElementById("demo2").innerHTML = 10.50; 
+//Number (Fixed Values or Literals) can be written with or without decimals.
+</script>
+
+<p id="demo3"></p>
+
+<script>
+document.getElementById("demo3").innerHTML = "John"+" "+"Doe";
+//For Identifiers, Numbers are not allowed as the first character
+</script>
+
+<p id="demo4"></p>
+
+<script>
+var lastName;
+lastName = "Doe";
+document.getElementById("demo4").innerHTML = 
+lastName;
+//camel case that starts with a lowercase letter is often used in JS variable Names
+// spaces are ignored in JS, but can be added to make it more readable.
+// A good practice is to put spaces around operators ( = + - * / ):
+/*For best readability, programmers often like to avoid code lines longer than 80 characters.
+	If a JavaScript statement does not fit on one line, 
+	the best place to break it, is after an operator:
+*/
+</script>
+
+<p>The result of adding "5" + 2 + 3:</p>
+
+<p id="demo5"></p>
+
+<p>The result of adding  2 + 3 + "5":</p>
+
+<p id="demo7"></p>
+<script>
+var x = "5" + 2 + 3;
+var y = 2 + 3 + "5";
+document.getElementById("demo5").innerHTML = x;
+//number is put in quotes, the rest of the numbers will be treated as strings, and concatenated(字符串链接).
+//That is: If add a number and a string, the result will be a string!(JS treat the number as a string!)
+//When used on strings, the + operator is called the concatenation operator.
+document.getElementById("demo7").innerHTML = y;
+//JavaScript evaluates expressions from ***left to right***.
+</script>
+
+<p>The modular operator (%) returns the division remainder. 即余数</p>
+<p id="demo6"></p>
+
+<script>
+var x = 5;
+var y = 2;
+var z = x % y;
+document.getElementById("demo6").innerHTML = z;
+</script>
+
+<script>
+//JavaScript variables can hold many data types: numbers, strings, objects and more:
+var length = 16;                               // Number
+var lastName = "Johnson";                      // String
+var x = {firstName:"John", lastName:"Doe"};    // Object
+</script>
+
+<p id="demo8"></p>
+
+<script>
+var x1 = 34.00;
+var x2 = 34;
+var y = 123e5; //exponential notation
+var z = 123e-5;
+
+document.getElementById("demo8").innerHTML = x1 + "<br>" + x2 + "<br>" + y + "<br>" + z
+/*JavaScript has only one type of numbers.
+  Numbers can be written with, or without decimals:
+  Extra large or small numbers can be written with exponential notation:
+	  */
+</script>
+
+<p id="demo9"></p>
+
+<script>
+var cars = ["Saab","Volvo","BMW","Benz","Lambo"];
+var text ="";
+for(i=0; i<cars.length; i++){
+	text += cars[i] + " ";
+}
+
+document.getElementById("demo9").innerHTML = cars[0]+" "+text;
+/*
+ * JavaScript arrays are written with square brackets[方括号].
+ * Array items are separated by commas.
+ * Array indexes are zero-based
+ * There is no need to use new Array() to create Array
+ * For simplicity, readability and execution speed.
+ * Arrays are Objects; Arrays are a special kind of objects, with ***numbered indexes***.
+ * The real strength of JavaScript arrays are the built-in array properties and methods:
+ */
+</script>
+
+<p>The typeof operator returns the type of a variable or an expression.</p>
+
+<p id="demo10"></p>
+
+<script>
+var person = {firstName:"John", lastName:"Doe", age:50, eyeColor:"blue"};
+var person = null; //we can empty an object by setting it to null:
+var undefinedTest = undefined;
+document.getElementById("demo10").innerHTML = 
+typeof "" + "<br>" +
+typeof "John" + "<br>" + 
+typeof "John Doe" +"<br>" +
+typeof (3.14+4) +"<br>" +
+typeof [1,2,3,4] + "<br>" +
+typeof {name:'john', age:34} + "<br>" +
+typeof function myFunc(){} + "<br>" + 
+typeof person + "<br>" + person + "<br>" + //Value of Null is "null"; but type is object
+typeof undefinedTest + "<br>" + undefinedTest; //Value is undefined, type is undefined
+</script>
+
+<p>This example calls a function to convert from Fahrenheit to Celsius:</p>
+<p id="demo11"></p>
+
+<script>
+document.getElementById("demo11").innerHTML = toCelsius(77);
+</script>
+
+<p id="demo12"></p>
+
+<script>
+document.getElementById("demo12").innerHTML =
+"The temperature is " + toCelsius(77) + " Celsius"; //function 直接可以当作variables使用
+</script>
+
+<p>Creating a JavaScript Object.</p>
+
+<p id="demo13"></p>
+
+<p>
+There are two different ways to access an object property: 
+</p>
+<p>You can use person.property or person["property"].</p>
+
+<p id="demo14"></p>
+
+<p>Creating and using an object method.</p>
+
+<p>An object method is a function definition, stored as a property value.</p>
+
+<p id="demo15"></p>
+
+<script>
+/*
+ * Object Definition: define (and create) a JavaScript object 
+ * with an object literal:
+ */
+var person = {
+    firstName : "John",
+    lastName  : "Doe",
+    age       : 50,
+    eyeColor  : "blue",
+    fullName : function() {
+    	return this.firstName + " " + this.lastName;
+    }
+};
+
+document.getElementById("demo13").innerHTML =
+person.firstName + " is " + person.age + " years old.";
+document.getElementById("demo14").innerHTML = person["firstName"] + " " + person.firstName;
+document.getElementById("demo15").innerHTML = person.fullName();
+</script>
+
+<p>
+If you assign a value to a variable that has not been declared,
+it will automatically become a GLOBAL variable:
+</p>
+
+<p id="demo16"></p>
+
+<script>
+myFunction();
+
+// code here can use carName as a global variable
+document.getElementById("demo16").innerHTML = "I can display " + carName;
+
+function myFunction() {
+    carName = "Volvo";
+}
+</script>
+
+<p>
+In HTML, all global variables will become Window Variables.
+</p>
+
+<p id="demo17"></p>
+
+<script>
+var carName = "Volvo";
+
+// code here can use window.carName
+document.getElementById("demo17").innerHTML = "I can display " + window.carName;
+</script>
+
+<button onclick="this.innerHTML=Date()">The time is?</button>
+<script> 
+//HTML Event: the code changes the content of its own element by using this.innerHTML 
+</script>
+
+<h2>JavaScript String Properties(Treat String as a Object)</h2>
+
+<p>The length property returns the length of a string ABCDEFGHIJKLMNOPQRSTUVWXYZ:</p>
+
+<p id="demo18"></p>
+
+<script>
+var txt = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+document.getElementById("demo18").innerHTML = txt.length;
+</script>
+
+<h2>Never Create Strings as objects.</h2>
+<p>Strings and objects cannot be safely compared.</p>
+
+<p id="demo19"></p>
+
+<script>
+var x = "John";              // x is a string
+var y = new String("John");  // y is an object
+document.getElementById("demo19").innerHTML = (x===y);
+</script>
+
+<p>The substr() method extract a part of a string
+and returns the extracted parts in a new string:</p>
+
+<p>The string is : abcdefghijklmn opqrstuvwxyz</p>
+
+<p id="demo20"></p>
+
+<script>
+var str = "abcdefghijklmn opqrstuvwxyz";
+var res = str.substring(7,13);
+document.getElementById("demo20").innerHTML = res +" use substr(start pos, length): " + str.substr(7,6);
+</script>
+
+<p>Replace "Microsoft" with "W3Schools" in the paragraph below:</p>
+
+<button onclick="replace1()">Try it</button>
+
+<button onclick="replaceAll()">Replace All</button>
+
+<p id="demo21">Please visit Microsoft and Microsoft!</p>
+
+<script>
+function replace1() {
+    var str = document.getElementById("demo21").innerHTML; 
+    var txt = str.replace("Microsoft","W3Schools");
+    document.getElementById("demo21").innerHTML = txt;
+    //The replace() method does not change the string it is called on.
+    //It returns a new string.
+}
+function replaceAll(){
+	var str = document.getElementById("demo21").innerHTML; 
+    var txt = str.replace(/Microsoft/g,"W3Schools");
+    //use a regular expression with a /g flag (global match)
+    document.getElementById("demo21").innerHTML = txt;
+}
+</script>
+
+<p> 利用split() method 直接可以将String 转换为数组</p>
+
+<p id="demo22"></p>
+
+<script>
+var str = "Hello";
+var arr = str.split("");
+var text = "";
+var i;
+for (i = 0; i < arr.length; i++) {
+    text += arr[i] + " "
+}
+document.getElementById("demo22").innerHTML = text;
+</script>
+
+<script>
+var numTest = 9.656;
+numTest.toExponential(6); //returns 9.656000e+0
+numTest.toFixed(2);// returns 9.65
+numTest.toPrecision(6); //returns 9.65600
+Math.ceil(5.5); //returns 6
+Math.floor(5.5) //returns 5 Math.floor(x) returns the value of x rounded down to its nearest integer:
+</script>
+
+<p>Math.random() returns a random number between 0 and 1:</p>
+
+<p id="demo23"></p>
+
+<script>
+document.getElementById("demo23").innerHTML = Math.random();
+</script>
+
+<p>Math.floor(Math.random() * 10) returns a random integer between 0 and 9 (both included).</p>
+
+<p id="demo24"></p>
+
+<script>
+document.getElementById("demo24").innerHTML =
+Math.floor(Math.random() * 10);
+</script>
+
+<p>Every time you click the button, getRndInteger(min, max) returns a random number between 11 (included) and 60 (excluded):</p>
+
+<button onclick="document.getElementById('demo25').innerHTML = getRndInteger(11,60)">Click Me</button>
+
+<p id="demo25"></p>
+
+<script>
+function getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min/*+1 :即可产生[min,max]范围随机数*/)) + min;
+}
+</script>
+
+<p id="demo26"></p>
+
+<script>
+var date = new Date();
+document.getElementById("demo26").innerHTML = date.toDateString();
+//The toDateString() method converts a date to a more readable format:
+</script>
+
+<p>Separate date and time with a capital T.</p>
+
+<p>Indicate UTC time with a capital Z.</p>
+
+<p id="demo27"></p>
+
+<script>
+document.getElementById("demo27").innerHTML =
+new Date("2015-03-25T12:00:00Z");
+//ISO dates can be written with added hours, minutes, and seconds (YYYY-MM-DDTHH:MM:SSZ):
+</script>
+
+<p>The internal clock in JavaScript starts at midnight January 1, 1970.</p>
+<p>The getTime() function returns the number of milliseconds since then:</p>
+
+<p id="demo28"></p>
+
+<script>
+var d = new Date();
+document.getElementById("demo28").innerHTML = d.getTime();
+</script>
+
+<button onclick="myFunction1()">Sort Alphabetically</button>
+<button onclick="myFunction2()">Sort Numerically</button>
+
+<p id="demo29"></p>
+
+<script>
+var points = [40, 100, 1, 5, 25, 10];
+document.getElementById("demo29").innerHTML = points;
+
+function myFunction1() {
+    points.sort();
+    document.getElementById("demo29").innerHTML = points;
+}
+function myFunction2() {
+    points.sort(function(a, b){return a - b}/*compare function*/);
+    document.getElementById("demo29").innerHTML = points;
+}
+</script> 
+
+<p> Everything With a "Real" Value is True </p>
+<p id="demo30"></p>
+
+<script>
+var b1 = Boolean(100);
+var b2 = Boolean(3.14);
+var b3 = Boolean(-15);
+var b4 = Boolean("Hello");
+var b5 = Boolean('false');
+var b6 = Boolean(1 + 7 + 3.14);
+
+document.getElementById("demo30").innerHTML =
+"100 is " + b1 + "<br>" +
+"3.14 is " + b2 + "<br>" +
+"-15 is " + b3 + "<br>" +
+"Any (not empty) string is " + b4 + "<br>" +
+"Even the string 'false' is " + b5 + "<br>" +
+"Any expression (except zero) is " + b6;
+/* The boolean value of " 0, -0, "", undefined, null, false, NaN" is false*/
+</script>
+
+<h2>Create Object from JSON String</h2>
+
+<p id="demo31"></p>
+
+<script>
+//First Create JavaScript string containing JSON syntax:
+var text = '{"employees":[' +
+'{"firstName":"John","lastName":"Doe" },' +
+'{"firstName":"Anna","lastName":"Smith" },' +
+'{"firstName":"Peter","lastName":"Jones" }]}';
+
+obj = JSON.parse(text); 
+//JS built-in function JSON.parse() to convert the string into a JS object:
+document.getElementById("demo31").innerHTML =
+obj.employees[1].firstName + " " + obj.employees[1].lastName;
+</script>
+
+<p>Please input a number between 5 and 10:</p>
+
+<input id="demo32" type="text">
+<button type="button" onclick="myFunction()">Test Input</button>
+<p id="message"></p>
+
+<script>
+function myFunction() {
+    var message, x;
+    message = document.getElementById("message");
+    message.innerHTML = "";
+    x = document.getElementById("demo32").value;
+    try {
+        if(x == "") throw "empty";
+        if(isNaN(x)) throw "not a number";
+        x = Number(x);
+        if(x < 5) throw "too low";
+        if(x > 10) throw "too high";
+    }
+    catch(err) {
+        message.innerHTML = "Input is " + err;
+    }
+    finally {
+        document.getElementById("demo32").value = "";
+    }
+}
+</script>
+
+<p id="demo33"></p>
+
+<p>With the debugger turned on, the code below should stop executing before it executes the third line.</p>
+
+<script>
+var x = 15 * 5;
+debugger;
+document.getElementById("demo33").innerHTML = x;
+//The debugger keyword stops the execution of JavaScript, and callsthe debugging function.
+//This has the same function as setting a ***breakpoint*** in the debugger.
+</script>
+
+<p>Using the prototype Property to add new properties and methods to Prototype </p>
+
+<p id="demo34"></p>
+
+<script>
+function Person(first, last, age, eye) {
+    this.firstName = first;
+    this.lastName = last;
+    this.age = age;
+    this.eyeColor = eye;
+}
+var myFather = new Person("John", "Doe", 50, "blue");
+//JS prototype property allows you to add new methods to an existing prototype:
+Person.prototype.name = function() {
+    return this.firstName + " " + this.lastName
+};
+
+//var myFather = new Person("John", "Doe", 50, "blue");
+document.getElementById("demo34").innerHTML =
+"My father is " + myFather.name(); 
+</script>
+
+<p>This <strong>call()</strong> example uses the fullName method of person on myObject:</p>
+
+<p id="demo35"></p>
+
+<script>
+/***With call(), you can use a method belonging to another object.***/
+var person = {
+    firstName:"John",
+    lastName: "Doe",
+    fullName: function() {
+        return this.firstName + " " + this.lastName;
+    }
+}
+var myObject = {
+    firstName:"Mary",
+    lastName: "Doe",
+}
+x = person.fullName.call(myObject); 
+document.getElementById("demo35").innerHTML = x; 
+
+</script>
+
+<p>Counting with a local variable.</p>
+
+<button type="button" onclick="myFunction()">Count!</button>
+
+<p id="demo36">0</p>
+
+<script>
+var add = (function () {
+//The variable add is assigned the return value of a self-invoking function.
+    var counter = 0;
+    return function () {return counter += 1;}
+    //The self-invoking function only runs once. 
+    //It sets the counter to zero (0), and returns a function expression.
+})();
+/*
+ * 于是add成为了一个函数. 
+ * The "wonderful" part is that it can access the counter in the parent scope.
+ * This is called a JavaScript ***closure***.
+ * It makes it possible for a function to have "private" variables.
+ * The counter is protected by the scope of the anonymous function, 
+ * and can only be changed using the add function.
+ * A closure is a function having access to the parent scope, 
+ * even after the parent function has closed.
+*/
+
+function myFunction(){
+    document.getElementById("demo36").innerHTML = add();
+}
+</script>
+
+</body>
+</html>
+
+

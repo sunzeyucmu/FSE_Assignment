@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+	<title>JQuery Adventures</title>
+	<link rel="stylesheet" href="JQueryApp.css" />
+</head>
+<body>
+	<h1>Where do you want to go?</h1>
+	<h2>Travel Destinations</h2>
+	<p>Plan your next adventure.</p>
+	<ul id="destinations">
+	  <li>Rome</li>
+	  <li>
+	  	<ul id="france">
+	  		<li>Paris</li>
+	  	</ul>
+	  </li>
+	  <li class='promo'>Rio</li>
+	</ul>
+	<div id="tours">
+	  <h1>Guided Tours</h1>
+		  <ul>
+		    <li class="vacation onsale" data-price='399.99'>
+		    	<h2>Hawaiian Vacation</h2>
+		    	<a href='#' class='expand'>Show Comments</a>
+		    	<ul class='comments'>
+		      		<li>Amazing deal!</li>
+		      		<li>Want to go!</li>
+		    	</ul>
+		      	<button class="book">Get Price</button>
+		      	<p>
+		      		Tickets:
+		      		<input type='number' class='quantity' value='1' />
+		      	</p>
+		      	<p>Total Price: $<span id='total'>399.99</span>
+		    </li>
+		    <li class="vacation" data-price='99.99'>
+		      <h2>Orlando</h2>
+		      <button class="book">Get Price</button>
+		      <a href='#' class='expand'>Show Comments</a>
+		      <ul class='comments'>
+		      	<li>Aren't any comments yet!</li>
+		      </ul>
+		    </li>
+		    <li class="vacation expiring" data-price='899.99'> 
+		      <h2>Visit Japan</h2>
+		      <button class="book">Get Price</button>
+		      <a href='#' class='expand'>Show Comments</a>
+		      <ul class='comments'>
+		      	<li>"Never been, but can't wailt!"</li>
+		      </ul>
+		    </li>
+		    <li class='confirmation'>
+		    	<h3>Hawaiian Vacation</h3>
+				<button>FLIGHT DETAILS</button>
+			      	<img src= "/Users/mac/Documents/JSWorkspace/Test/WebContent/weka.png">
+			      	<div class='ticket'>
+			      		<a href='#' class='view-boarding-pass'>View Boarding Pass</a>
+			      		<img src='ticket-14836.png'/>
+			      	</div>
+			 </li>
+		  </ul>
+	</div>
+	<div id='filters'>>
+		<button class='onsale-filter'>On Sale Now</button>
+		<button class='expiring-filter'>Expiring</button>
+	</div>
+	<script src="jquery-3.2.1.min.js"></script>
+	<script src= "JQueryApp.js"></script> 
+</body>
+</html>

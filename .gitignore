@@ -36,3 +36,11 @@
 .metadata/.plugins/org.eclipse.jdt.core/assumedExternalFilesCache
 FSE_ChatRoom/.DS_Store
 FSE_ChatRoom/src/.DS_Store
+RemoteSystemsTempFiles/.project
+*.mark
+*.ser
+*.history
+*.node
+.DS_Store
+.DS_Store
+.DS_Store
