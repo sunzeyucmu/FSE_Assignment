@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Chat Room</title>
+</head>
+<body>
+
+    <script src="socket.io.js"></script>
+    <script>
+        var socket = io.connect('http://localhost:8080'); //connect to our Socket.IO server
+        
+        socket.on('message', function(data){ //Listen for that 'message' event
+                  alert(data.hello);
+                  
+                  });
+    </script>
+</body>
+</html>

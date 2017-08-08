@@ -5,7 +5,8 @@
 
 $(function(){
 	$.get('/blocks', appendToList);  //return blocks in JSON format
-
+  //'$.get(url, success)' 是类似于'$.ajax' 的JQuery方法， 这里appendToList相当于success function
+  
   $('form').on('submit', function(event){ //Check out JQuery&AJAX Tutorial Charpter 3<AJAX with Forms> on Code School
     event.preventDefault(); //the click event will 'bubble up', but let browser ignore it(won't handle it)
                //prevent the browser from jumping to the top of the page when the submit button is clicked as well.

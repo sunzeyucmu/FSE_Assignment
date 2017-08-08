@@ -44,3 +44,9 @@ RemoteSystemsTempFiles/.project
 .DS_Store
 .DS_Store
 .DS_Store
+*.md
+chatRoom/node_modules/content-disposition/LICENSE
+*.md
+*.md
+*.yml
+chatRoom/node_modules/arraybuffer.slice/Makefile
