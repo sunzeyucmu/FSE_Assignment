@@ -5,15 +5,44 @@
 <title>Chat Room</title>
 </head>
 <body>
-
+    <h1 id='status'></h1>
+    <form id= 'chat_form'>
+        <legend>New Block</legend>
+        <input id= 'chat_input' />
+        <input type="Submit" value= 'Send'>
+    </form>
+    <ul class = 'message_list'>
+    </ul>
     <script src="socket.io.js"></script>
+    <script src="jquery-3.2.1.min.js"></script>
     <script>
         var socket = io.connect('http://localhost:8080'); //connect to our Socket.IO server
         
-        socket.on('message', function(data){ //Listen for that 'message' event
-                  alert(data.hello);
-                  
+        socket.on('connect', function(data){
+                  $('#status').html('Connected to Server');
+                  nickname = prompt('What is your nickname'); //要求输入用户名(昵称)
+                  alert(nickname);
+                  socket.emit('join', nickname); //Emit the 'join' Event, Send NickName back to server side
                   });
+        
+        socket.on('message', function(data){ //Listen for that 'message' event
+                  alert('Get Message from Broadcast');
+                  insertMessage(data); //Insert Message into the chatRoom
+                  });
+        $('#chat_form').submit(function(event){ //Hit Submit to send message
+                               event.preventDefault();
+                               alert('Submit Hit!!!');
+                               var message = $('#chat_input').val(); //grab the Message from message input Box
+                               socket.emit('message', message); //Emit the message event on the Server
+                               //***先假设Server Side 批准该Message***//
+                               //insertMessage(message);
+                               });
+                               
+        //
+        function insertMessage(data){
+            var messageLi = $('<li>'+ data +'</li>');
+            $('.message_list').append(messageLi);
+        }
     </script>
 </body>
 </html>

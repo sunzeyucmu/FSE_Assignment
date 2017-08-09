@@ -7,8 +7,23 @@ var io = require('socket.io')(server); //require 'socket.io' module and allow it
 io.on('connection', function(client){
   //listen for 'connection' event inside Socket.IO
   console.log('Client connected!'); //
-  client.emit('message', {hello: 'world'});//emit 'message' event on our clien, which is the browsers!
+  //client.emit('message', {hello: 'world'});//emit 'message' event on our clien, which is the browsers!
+  //Let server listen for 'message' event
+  client.on('message', function(data){//监听客户发送的 Message
+    console.log(data); //log out the message sent by client
+    //before Broadcast , get the nickname of the client
+    var nickname = client.nickname;
+    //Broadcast with the name and message
+    client.broadcast.emit('message', "Username: "+nickname + ": "+ data);// broadcast message to all other(注意不包括发送的那个) clients connected
+    client.emit('message', nickname + ": " + data);// send the same message back to current client,
+    //Let Them see their own Messages
+  });
   
+  client.on('join', function(name){//Somebody calls join (join the chatRoom)
+    //asume they're going to send in a Name
+    console.log(name);
+    client.nickname = name; //Set Nick Name associate with this client
+  });
 });
 
 app.use(express.static('public')); //static middleware serving files from public folder
