@@ -5,6 +5,8 @@
 <title>Chat Room</title>
 </head>
 <body>
+    <ul class = 'chatter_list'>
+    </ul>
     <h1 id='status'></h1>
     <form id= 'chat_form'>
         <legend>New Block</legend>
@@ -24,11 +26,27 @@
                   alert(nickname);
                   socket.emit('join', nickname); //Emit the 'join' Event, Send NickName back to server side
                   });
-        
+    
         socket.on('message', function(data){ //Listen for that 'message' event
                   alert('Get Message from Broadcast');
                   insertMessage(data); //Insert Message into the chatRoom
                   });
+        
+        socket.on('chat', function(data){
+                  //暂时将加入用户信息挂在message_list上
+                  insertMessage(data);
+                  });
+        
+        socket.on('addChatter', function(data){
+                  //alert('New Chatter! ');
+                  insertChatter(data);
+                  });
+        
+        socket.on('removeChatter', function(name){
+                  alert('A chatter Left');
+                  $('.chatter_list li[data-name='+name + ']').remove();
+                  });
+        
         $('#chat_form').submit(function(event){ //Hit Submit to send message
                                event.preventDefault();
                                alert('Submit Hit!!!');
@@ -37,12 +55,21 @@
                                //***先假设Server Side 批准该Message***//
                                //insertMessage(message);
                                });
-                               
-        //
+                            
+        /*
+        window.onunload=function(){
+            
+            socket.disconnect(true);
+        }
+         */
         function insertMessage(data){
             var messageLi = $('<li>'+ data +'</li>');
             $('.message_list').append(messageLi);
         }
+    function insertChatter(name){
+        var chatter = $('<li>'+ name +'</li>').data('name', name);
+        $('.chatter_list').append(chatter);
+    }
     </script>
-</body>
+    </body>
 </html>
