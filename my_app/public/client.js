@@ -3,7 +3,7 @@
 //$.each runs for each item in the array, but returns the original array unchanged
 //$.map creates a new array from returned results
 
-$(function(){
+$(function(){ //***$(document).ready(function(){})可以简写成$(function(){})***;
 	$.get('/blocks', appendToList);  //return blocks in JSON format
   //'$.get(url, success)' 是类似于'$.ajax' 的JQuery方法， 这里appendToList相当于success function
   

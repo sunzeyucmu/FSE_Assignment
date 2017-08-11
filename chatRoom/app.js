@@ -13,10 +13,11 @@ io.on('connection', function(client){
   console.log('Client connected!'); //
   //client.emit('message', {hello: 'world'});//emit 'message' event on our clien, which is the browsers!
   //Let server listen for 'message' event
+  /*
   setTimeout(function(){
-    console.log("Oh");
+    console.log("Oh Connection Timeout");
     client.disconnect(true);
-  }, 5000);
+  }, 50000);*/
   
   client.on('message', function(data){//监听客户发送的 Message
     console.log(data); //log out the message sent by client
@@ -29,31 +30,59 @@ io.on('connection', function(client){
     storeMessage(nickname, data); //store the client's message
   });
   
-  client.on('join', function(name){//Somebody calls join (join the chatRoom)
+  client.on('join', function(userInfo){//Somebody calls join (join the chatRoom)
     //asume they're going to send in a Name
-    console.log(name);
-    client.broadcast.emit('addChatter', name); //Notify other clients a chatter has joined
+    console.log(userInfo.name + " " + userInfo.psw);
+    //client.broadcast.emit('addChatter', userInfo.name); //Notify other clients a chatter has joined
+    var info = JSON.stringify(userInfo);
+
+    redisClient.hget('chatters', userInfo.name, function(err, reply){
+    //redisClient.sadd('chatters', info, function(err, reply){
+      console.log("Reply From HGET: "+reply);
+      if(reply !== null && reply != userInfo.psw){// hash "chatters" stored at Redis  contains the specified field(UserName).UserName Already Exist
+        console.log('UserName Exists Or Wrong PassWord!');
+        
+        client.emit('nameExistOrWrongPsw', userInfo); //Send Back To Client
+      }else{ //Add this chatter to Redis set 'chatters'
+        client.emit('logIn', userInfo.name); //通知Client登陆成功
+        redisClient.sadd('onlineUsers', userInfo.name); //Add To Online List
+        client.broadcast.emit('addChatter', userInfo.name); //Notify other clients a chatter has joined
+        if(reply === null){//New User 新用户
+          console.log('New User!' );//
+          redisClient.hset('chatters', userInfo.name, userInfo.psw, redis.print);
+        }
+        /*
+        redisClient.hkeys('chatters', function(err, chatters){
+        chatters.forEach(function(chatter){
+          //var chatterInfo = JSON.parse(chatter);
+          client.emit('addChatter', chatter); 
+          //emit all the current loged in client(Stored in 'chatters', included this client) to the newly connected client
+        });
+       })*/
+        redisClient.smembers('onlineUsers', function(err, chatters){
+          chatters.forEach(function(chatter){
+          //var chatterInfo = JSON.parse(chatter);
+          client.emit('addChatter', chatter); 
+          //emit all the current loged in client(Stored in 'chatters', included this client) to the newly connected client
+        });
+       });
+
     
-    redisClient.smembers('chatters', function(err, chatters){
-      chatters.forEach(function(chatter){
-        client.emit('addChatter', chatter); 
-        //emit all the current loged in client(Stored in 'chatters') to the newly connected client
-      });
-    })
+      //redisClient.sadd('chatters', name); //add this chatter to our Redis set 'chatters'
+        client.nickname = userInfo.name; //Set Nick Name associate with this client
+        client.broadcast.emit('chat', userInfo.name+" joined the chat"); //Broadcast new user in the chat
     
-    redisClient.sadd('chatters', name); //add this chatter to our Redis set 'chatters'
-    client.nickname = name; //Set Nick Name associate with this client
-    client.broadcast.emit('chat', name+" joined the chat"); //Broadcast new user in the chat
-    
-    redisClient.lrange('messages', 0, -1, function(err, messages){
-      //First fetching all of the list items in 'messages' list
-      messages = messages.reverse(); //使聊天信息 emitted in the correct Order
-      messages.forEach(function(message){
-        //iterate through each of the messages stored in the server ,
-        //emit to that clien just joined
-        message = JSON.parse(message); //return it into JSON object(name and data properties)
-        client.emit('message', message.name+": "+message.data);
-      });
+        redisClient.lrange('messages', 0, -1, function(err, messages){
+          //First fetching all of the list items in 'messages' list
+          messages = messages.reverse(); //使聊天信息 emitted in the correct Order
+          messages.forEach(function(message){
+          //iterate through each of the messages stored in the server ,
+          //emit to that clien just joined
+          message = JSON.parse(message); //return it into JSON object(name and data properties)
+          client.emit('message', message.name+": "+message.data);
+          });
+        });
+      }
     });
   });
   
@@ -62,7 +91,7 @@ io.on('connection', function(client){
     var nickname = client.nickname;
     client.broadcast.emit('removeChatter', nickname);
     
-    redisClient.srem('chatters', nickname); //Remove them from our Redis set
+    redisClient.srem('onlineUsers', nickname); //Remove them from our Redis set
   })
 });
 
