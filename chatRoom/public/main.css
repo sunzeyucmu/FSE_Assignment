@@ -1,0 +1,16 @@
+.features{
+    min-height : 800px;
+    max-height : 800px;
+    overflow-y : scroll;
+}
+
+.features1{
+    min-height : 765px;
+    max-height : 765px;
+    overflow-y : scroll;
+    margin-bottom : 1px;
+}
+
+.features2{
+    margin-bottom : 6px;
+}

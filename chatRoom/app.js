@@ -23,11 +23,14 @@ io.on('connection', function(client){
     console.log(data); //log out the message sent by client
     //before Broadcast , get the nickname of the client
     var nickname = client.nickname;
+    var d = new Date();
+    
+    var message = JSON.stringify({timeStamp: d.toUTCString(), name: nickname, data: data});
     //Broadcast with the name and message
-    client.broadcast.emit('message', nickname + ": "+ data);// broadcast message to all other(注意不包括发送的那个) clients connected
-    client.emit('message', nickname + ": " + data);// send the same message back to current client,
+    client.broadcast.emit('message', message/*nickname + ": "+ data*/);// broadcast message to all other(注意不包括发送的那个) clients connected
+    client.emit('message', message/*nickname + ": " + data*/);// send the same message back to current client,
     //Let Them see their own Messages
-    storeMessage(nickname, data); //store the client's message
+    storeMessage(message); //store the client's message
   });
   
   client.on('join', function(userInfo){//Somebody calls join (join the chatRoom)
@@ -70,7 +73,7 @@ io.on('connection', function(client){
     
       //redisClient.sadd('chatters', name); //add this chatter to our Redis set 'chatters'
         client.nickname = userInfo.name; //Set Nick Name associate with this client
-        client.broadcast.emit('chat', userInfo.name+" joined the chat"); //Broadcast new user in the chat
+        //client.broadcast.emit('chat', userInfo.name+" joined the chat"); //Broadcast new user in the chat
     
         redisClient.lrange('messages', 0, -1, function(err, messages){
           //First fetching all of the list items in 'messages' list
@@ -78,8 +81,8 @@ io.on('connection', function(client){
           messages.forEach(function(message){
           //iterate through each of the messages stored in the server ,
           //emit to that clien just joined
-          message = JSON.parse(message); //return it into JSON object(name and data properties)
-          client.emit('message', message.name+": "+message.data);
+         // message = JSON.parse(message); //return it into JSON object(name and data properties)
+          client.emit('message', message/*message.name+": "+message.data*/);
           });
         });
       }
@@ -107,8 +110,9 @@ app.get('/'//root route,function(req, res){
 
 server.listen(8080); //Get server listen on port 8080
 
-var storeMessage = function(name, data){
-  var message = JSON.stringify({name: name, data: data});
+var storeMessage = function(message/*name, data*/){
+ // var d = new Date();
+  //var message = JSON.stringify({timestamp: d.toUTCString, name: name, data: data});
   //Turn the object into a String, whcih can be easily stored in Redis
   redisClient.lpush('messages', message, function(err, response){
   //send in the new message(contain name and data), into 'messages' list Stored in Redis
