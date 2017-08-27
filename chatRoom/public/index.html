@@ -40,12 +40,19 @@
         </div>
     </div>
     <button id= 'quitChat' class='btn'>Quit ChatRoom</button>
-    <form id='join_form' class='col-sm-12'>
-        <legend>New Block</legend>
-        <input id="user_name" placeholder='User Name'><br/>
-        <input id="user_psw"  placeholder='User Password'><br/>
-        <input type="Submit" value= 'Join the Chat!'>
-    </form>
+    <div class='row'>
+        <div class='col-sm-12'>
+            <form id='join_form'>
+                <legend>New Block</legend>
+                <input id="user_name" placeholder='User Name'><br/>
+                <input id="user_psw"  type="password" placeholder='User Password'><br/>
+                <input id="psw_confirm" class='feature-register' type="password" placeholder='Enter Your PassWord Again'><br/>
+                <button id='regis_join' class="btn btn-default feature-register" type="button">Register and Join!</button>
+                <input id='join_btn' type="Submit" value= 'Join the Chat!'>
+                <button id='register' class="btn btn-default" type="button">Register</button>
+            </form>
+        </div>
+    </div>
     </div>
     <script src="socket.io.js"></script>
     <script src="jquery-3.2.1.min.js"></script>

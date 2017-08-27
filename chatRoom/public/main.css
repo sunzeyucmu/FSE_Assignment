@@ -2,6 +2,7 @@
     min-height : 800px;
     max-height : 800px;
     overflow-y : scroll;
+    display : none;
 }
 
 .features1{
@@ -9,8 +10,13 @@
     max-height : 765px;
     overflow-y : scroll;
     margin-bottom : 1px;
+    display : none;
 }
 
 .features2{
     margin-bottom : 6px;
+}
+
+.feature-register{
+    display : none;
 }

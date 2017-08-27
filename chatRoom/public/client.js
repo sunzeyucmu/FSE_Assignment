@@ -19,6 +19,9 @@ var socket = io.connect('http://localhost:8080'); //connect to our Socket.IO ser
         
         socket.on('logIn', function(name){
                   $('#join_form').remove();
+                  $('.features').slideDown();
+                  $('.features1').slideDown();
+                  //$('.features2').fadeIn();
                   $('#status').html('Log into ChatRoom');
                   });
         socket.on('message', function(data){ //Listen for that 'message' event
@@ -64,6 +67,7 @@ var socket = io.connect('http://localhost:8080'); //connect to our Socket.IO ser
         function insertMessage(data){
             message = JSON.parse(data); //return it into JSON object(timeStamp, name and data properties)
             var messageLi = $('<a href="#" class="list-group-item features2"></a>');
+            //features2 control the style of each message Box
             $('<h4 class="list-group-item-heading">'+message.timeStamp+'</h4>').appendTo(messageLi);
             $('<p class="list-group-item-text">'+message.name+": "+message.data+'</p>').appendTo(messageLi);
             $('#message_list').append(messageLi);
@@ -98,6 +102,40 @@ var socket = io.connect('http://localhost:8080'); //connect to our Socket.IO ser
                                              form.trigger('reset');
                                              });
                                    }
+            });
+          
+            $('#register').on('click', function(event){
+                           event.preventDefault();
+                           var form = $(this).closest('#join_form');
+                           form.find('#psw_confirm').slideDown();
+                           form.find('#regis_join').fadeIn();
+                           form.find('#join_btn').remove();
+                           $(this).remove();
+            });
+            
+            $('#regis_join').on('click', function(event){
+                                event.preventDefault();
+                                var form = $(this).closest('#join_form');
+                                var userName = $('#user_name').val();
+                                var preUserName = userName;
+                                var userPsw = $('#user_psw').val();
+                                var pswCof = $('#psw_confirm').val();
+                                if(userName === ""){
+                                alert("Empty UserName!");
+                                form.trigger('reset'); //cleans up form text input fields
+                                }else if(userPsw === ""){
+                                alert("Empty UserPassword!");
+                                form.trigger('reset');  //cleans up form text input fields
+                                }else if(pswCof === ""){
+                                alert("Please confim your PassWord!");
+                                form.trigger('reset');  //cleans up form text input fields
+                                }
+                                else if(userPsw !== pswCof){
+                                alert("Please enter the same PassWord");
+                                form.trigger('reset');  //cleans up form text input fields
+                                $('#user_name').val(preUserName);
+                                }
+               
             });
        
         });
