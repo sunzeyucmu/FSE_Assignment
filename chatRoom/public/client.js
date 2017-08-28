@@ -96,9 +96,14 @@ var socket = io.connect('http://localhost:8080'); //connect to our Socket.IO ser
                                         form.trigger('reset');  //cleans up form text input fields
                                    }else{
                                     //alert("HHH");
-                                   socket.emit('join',{'name' : userName, 'psw' : userPsw});
-                                   socket.on('nameExistOrWrongPsw', function(existInfo){
-                                             alert('User Name Already Exist! Please Try Again! :)');
+                                   socket.emit('join',{'name' : userName, 'psw' : userPsw, 'option' : 'j'});
+                                    //'option : j' stands for join request only
+                                   socket.on('invalidUserName', function(userInfo){
+                                             alert('UserName Do Not Exist!');
+                                             form.trigger('reset');
+                                             });
+                                   socket.on('wrongPsw', function(existInfo){
+                                             alert('Wrong PassWord! :)');
                                              form.trigger('reset');
                                              });
                                    }
@@ -109,6 +114,7 @@ var socket = io.connect('http://localhost:8080'); //connect to our Socket.IO ser
                            var form = $(this).closest('#join_form');
                            form.find('#psw_confirm').slideDown();
                            form.find('#regis_join').fadeIn();
+                           //Remove button 'Join the Chat' & 'Register'
                            form.find('#join_btn').remove();
                            $(this).remove();
             });
@@ -134,6 +140,14 @@ var socket = io.connect('http://localhost:8080'); //connect to our Socket.IO ser
                                 alert("Please enter the same PassWord");
                                 form.trigger('reset');  //cleans up form text input fields
                                 $('#user_name').val(preUserName);
+                                }
+                                else{//Register and Join
+                                //Register and Join Request
+                                socket.emit('join',{'name' : userName, 'psw' : userPsw, 'option' : 'rj'});
+                                socket.on('userExist', function(userInfo){
+                                          alert('User Already Exists! Try Another One');
+                                          form.trigger('reset');
+                                          });
                                 }
                
             });
