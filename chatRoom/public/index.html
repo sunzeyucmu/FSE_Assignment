@@ -27,7 +27,11 @@
                     <h3 class="panel-title">Messages</h3>
                 </div>
                 <div class='panel-body'>
+                    <div id='messageHis_list' class='list-group features-chatHis'>
+                    </div>
+                    <a href='#' id='show_chathis' class='text-center'>Show Chat History</a>
                     <div id='message_list' class='list-group'>
+                        <!--<a href='#' id='show_chathis' class='list-group-item text-center'>Show Chat History</a>-->
                     </div>
                 </div>
             </div>
@@ -39,20 +43,62 @@
             </div><!-- /input-group -->
         </div>
     </div>
-    <button id= 'quitChat' class='btn'>Quit ChatRoom</button>
-    <div class='row'>
-        <div class='col-sm-12'>
-            <form id='join_form'>
+    <button id= 'quitChat' class='btn btn-danger' type='button'>Quit ChatRoom</button>
+            <form id='join_form' class='feature-input'>
                 <legend>New Block</legend>
-                <input id="user_name" placeholder='User Name'><br/>
-                <input id="user_psw"  type="password" placeholder='User Password'><br/>
-                <input id="psw_confirm" class='feature-register' type="password" placeholder='Enter Your PassWord Again'><br/>
+                <!--<div class='row form-group'>
+                    <div class="input-group col-sm-4 col-sm-offset-4">
+                        <span class="input-group-addon" id="basic-addon1">@</span>
+                        <input id="user_name" type="text" class="form-control" placeholder="User Name" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                
+                <div class='row form-group'>
+                    <div class="input-group col-sm-4 col-sm-offset-4">
+                        <input id="user_psw" type="password" class="form-control" placeholder="User Password" aria-describedby="basic-addon2">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">
+                                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+
+                <div id='psw_confirm_div' class='row form-group feature-register'>
+                    <div class="input-group col-sm-4 col-sm-offset-4">
+                        <span class="input-group-addon" id="basic-addon3">*</span>
+                        <input id="psw_confirm" type="password" class="form-control" placeholder="Enter Your PassWord Again" aria-describedby="basic-addon3">
+                    </div>
+                </div>-->
+                <div class='row form-group'>
+                    <div class="col-sm-4 col-sm-offset-4">
+                        <input id="user_name" type="text" class="input_block" placeholder="User Name">
+                    </div><!-- /input-group -->
+                </div>
+                
+                <div class='row form-group'>
+                    <div class="col-sm-4 col-sm-offset-4">
+                        <input id="user_psw" type="password" class="input_block" placeholder="User Password">
+                        <i id='pswVisible' class="glyphicon glyphicon-eye-close feature-i" aria-hidden="true"></i>
+                    </div><!-- /input-group -->
+                </div>
+                
+                <div id='psw_confirm_div' class='row form-group feature-register'>
+                    <div class="col-sm-4 col-sm-offset-4">
+                        <input id="psw_confirm" type="password" class="input_block" placeholder="Enter Your PassWord Again">
+                    </div><!-- /input-group -->
+                </div>
+                
                 <button id='regis_join' class="btn btn-default feature-register" type="button">Register and Join!</button>
-                <input id='join_btn' type="Submit" value= 'Join the Chat!'>
-                <button id='register' class="btn btn-default" type="button">Register</button>
+                <div class='row'>
+                    <div class ='col-sm-1 col-sm-offset-4'>
+                        <button id='join_btn' class="btn btn-default" type="button">LogIn</button>
+                    </div>
+                    <div class= 'col-sm-1'>
+                        <button id='register' class="btn btn-default" type="button">Register</button>
+                    </div>
+                </div>
             </form>
-        </div>
-    </div>
     </div>
     <script src="socket.io.js"></script>
     <script src="jquery-3.2.1.min.js"></script>

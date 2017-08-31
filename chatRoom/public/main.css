@@ -17,6 +17,34 @@
     margin-bottom : 6px;
 }
 
+.features-chatHis{
+    display:none;
+}
+
 .feature-register{
     display : none;
+}
+
+input{
+    width: 100%;
+    height: 50px;
+    border:none;
+    padding-left:3px;
+    padding-bottom:0px;
+    font-size: 16px;
+}
+input:focus {
+    outline: none;
+}
+/*输入框底部半透明横线*/
+.input_block {
+    border-bottom: 1px solid rgba(0,0,0,.1);
+}
+.feature-i{
+    width: 40px;
+    height: 25px;
+    font-size: 24px;
+    position: absolute;
+    right: 0px;
+    margin: 15px;
 }

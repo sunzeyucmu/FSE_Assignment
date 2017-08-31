@@ -161,12 +161,12 @@ var logIn = function(userInfo, client){ //A Chatter Log Into the ChatRoom
     
         redisClient.lrange('messages', 0, -1, function(err, messages){
           //First fetching all of the list items in 'messages' list
-          messages = messages.reverse(); //使聊天信息 emitted in the correct Order
+          //messages = messages.reverse(); //使聊天信息 emitted in the correct Order
           messages.forEach(function(message){
           //iterate through each of the messages stored in the server ,
           //emit to that clien just joined
          // message = JSON.parse(message); //return it into JSON object(name and data properties)
-          client.emit('message', message/*message.name+": "+message.data*/);
+          client.emit('messageHis', message/*message.name+": "+message.data*/); //emit History Message to login users
           });
         });
       

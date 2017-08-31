@@ -28,7 +28,12 @@ var socket = io.connect('http://localhost:8080'); //connect to our Socket.IO ser
                   alert('Get Message from Broadcast');
                   insertMessage(data); //Insert Message into the chatRoom
                   });
-        
+
+        socket.on('messageHis', function(data){ //Listen for that 'message' event
+          alert('Get History Messages');
+          insertMessageHis(data); //Insert Message into the chatRoom
+          });
+
         socket.on('chat', function(data){
                   //暂时将加入用户信息挂在message_list上
                   insertMessage(data);
@@ -58,9 +63,39 @@ var socket = io.connect('http://localhost:8080'); //connect to our Socket.IO ser
                           alert('QuitChatRoom!');
                           socket.disconnect(true);
         });
+
+        $('#pswVisible').on('click', function(event){
+                    event.preventDefault();
+                            if($(this).attr('class') === 'glyphicon glyphicon-eye-close feature-i'){
+                                $('#user_psw').attr('type', 'text');
+                                $('#psw_confirm').attr('type', 'text');
+                                $(this).attr('class', 'glyphicon glyphicon-eye-open feature-i');
+                            }
+                            else{
+                                $('#user_psw').attr('type', 'password');
+                                $('#psw_confirm').attr('type', 'password');
+                                $(this).attr('class', 'glyphicon glyphicon-eye-close feature-i');
+                            }
+        });
+
+        $('#show_chathis').on('click', function(event){
+                    event.preventDefault();
+                              //console.log(list.find('.features-chatHis'));
+                              console.log($('#messageHis_list').find('.list-group-item').length);
+                              if($('#messageHis_list').find('.list-group-item').length === 0){
+                                var message = $('<a href="#" class="list-group-item">No History Messages Available</a>');
+                              $('#messageHis_list').append(message);
+                              $(this).remove();
+                               $('#messageHis_list').fadeIn();
+                              }
+                              else{
+                              $('#messageHis_list').fadeToggle();
+                              }
+                    });
+
         /*
         window.onunload=function(){
-            
+         
             socket.disconnect(true);
         }
          */
@@ -72,6 +107,16 @@ var socket = io.connect('http://localhost:8080'); //connect to our Socket.IO ser
             $('<p class="list-group-item-text">'+message.name+": "+message.data+'</p>').appendTo(messageLi);
             $('#message_list').append(messageLi);
         }
+
+function insertMessageHis(data){ //Insert chat History
+    message = JSON.parse(data); //return it into JSON object(timeStamp, name and data properties)
+    var messageLi = $('<a href="#" class="list-group-item features2"></a>');
+    //features2 control the style of each message Box
+    $('<h4 class="list-group-item-heading">'+message.timeStamp+'</h4>').appendTo(messageLi);
+    $('<p class="list-group-item-text">'+message.name+": "+message.data+'</p>').appendTo(messageLi);
+    $('#messageHis_list').append(messageLi);
+}
+
     function insertChatter(name){
         //var chatter = $('<li>'+ name +'</li>').data('name', name);
         var chatter = $('<li></li>');
@@ -81,9 +126,9 @@ var socket = io.connect('http://localhost:8080'); //connect to our Socket.IO ser
     }
     function join(){
         $(document).ready(function(){
-            $('#join_form').submit(function(event){ //Hit Submit to send message
+            $('#join_btn').on('click', function(event){ //Hit Submit to send message
                                    event.preventDefault();
-                                   var form = $(this);
+                                   var form = $(this).closest('#join_form');
                                    alert('Join_Form Submit Hit!!!');
                                    var userName = $('#user_name').val();
                                    var userPsw = $('#user_psw').val();
@@ -112,7 +157,7 @@ var socket = io.connect('http://localhost:8080'); //connect to our Socket.IO ser
             $('#register').on('click', function(event){
                            event.preventDefault();
                            var form = $(this).closest('#join_form');
-                           form.find('#psw_confirm').slideDown();
+                           form.find('#psw_confirm_div').slideDown();
                            form.find('#regis_join').fadeIn();
                            //Remove button 'Join the Chat' & 'Register'
                            form.find('#join_btn').remove();
