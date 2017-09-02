@@ -28,13 +28,13 @@
                 </div>
             </div>
         </div>
-        <div id='chat_column' class= 'col-sm-8 col-sm-offset-1 col-xs-8 col-xs-offset-1 features-chatHis'>
+        <div id='chat_column' class= 'col-sm-8 col-sm-offset-1 col-xs-8 col-xs-offset-1 features-hide'>
             <div class="panel panel-info features1">
                 <div class="panel-heading">
                     <h3 class="panel-title">Messages</h3>
                 </div>
                 <div class='panel-body'>
-                    <div id='messageHis_list' class='list-group features-chatHis'>
+                    <div id='messageHis_list' class='list-group features-hide'>
                     </div>
                     <a href='#' id='show_chathis' class='text-center'>Show Chat History</a>
                     <div id='message_list' class='list-group'>
@@ -101,13 +101,15 @@
                     </div><!-- /input-group -->
                 </div>
                 
-                <div id='psw_confirm_div' class='row form-group feature-register'>
+                <div id='psw_confirm_div' class='row form-group features-hide'>
                     <div class="col-sm-4 col-sm-offset-4">
                         <input id="psw_confirm" type="password" class="input_block" placeholder="Enter Your PassWord Again">
                     </div><!-- /input-group -->
                 </div>
                 
-                <button id='regis_join' class="btn btn-default feature-register" type="button">Register and Join!</button>
+                <div id='rjDiv' class='row text-center features-hide'>
+                    <button id='regis_join' class="btn btn-default" type="button">Register and Join!</button>
+                </div>
                 <div class='row'>
                     <div class ='col-sm-1 col-sm-offset-4'>
                         <button id='join_btn' class="btn btn-default" type="button">LogIn</button>
@@ -122,5 +124,6 @@
     <script src="jquery-3.2.1.min.js"></script>
     <script src="bootstrap.js"></script>
     <script src="client.js"></script>
+    <script src="jqueryApp.js"></script>
     </body>
 </html>

@@ -27,10 +27,10 @@ io.on('connection', function(client){
     /*Debug for Date formate*/
     var year = d.getFullYear();
     var month = d.getMonth();
-    var date = d.getDate();
+    var date = (d.getDate() < 10) ? "0"+d.getDate() : d.getDate();
     var hour = d.getHours();
-    var minutes = d.getMinutes();
-    if(minutes < 10)minutes = "0" + minutes;
+    var minutes = (d.getMinutes() < 10) ? "0"+d.getMinutes() : d.getMinutes();
+    //if(minutes < 10)minutes = "0" + minutes;
     console.log("Current Mesaage 's time:"+month+"."+date+"."+year+" "+hour+":"+minutes);
     var timeStamp = month+"."+date+"."+year+" "+hour+":"+minutes;
     
@@ -80,37 +80,20 @@ io.on('connection', function(client){
       else{
           console.log('WTF');  
       }
-            /*
-      if(reply !== null && reply != userInfo.psw){// hash "chatters" stored at Redis  contains the specified field(UserName).UserName Already Exist
-        //UserName Exists, PassWord Wrong
-        if(option === 'j'){
-          //'Join' Request Only
-          console.log('Wrong PassWord')
-          client.emit('wrongPsw', userInfo); //Send Back To Client
-        }
-        else if(option === 'rj'){
-          //'Register and Join' Request
-          console.log
-        }
-        console.log('UserName Exists Or Wrong PassWord!');
-        client.emit('nameExistOrWrongPsw', userInfo); //Send Back To Client
-        
-      }else{ //Add this chatter to Redis set 'chatters'
-        if(reply === null){//New User 新用户
-          console.log('New User!' );//
-          redisClient.hset('chatters', userInfo.name, userInfo.psw, redis.print);
-        }
-        logIn(userInfo, client);
-      }*/
     });
   });
   
   client.on('disconnect', function(name){
-    console.log(client.nickname+" has left the chatRoom");
-    var nickname = client.nickname;
-    client.broadcast.emit('removeChatter', nickname);
+    if(client.nickname === undefined){
+      console.log("A client has left the chatRoom");
+    }
+    else{
+      console.log(client.nickname+" has left the chatRoom");
+      var nickname = client.nickname;
+      client.broadcast.emit('removeChatter', nickname);
     
-    redisClient.srem('onlineUsers', nickname); //Remove them from our Redis set
+      redisClient.srem('onlineUsers', nickname); //Remove them from our Redis set
+    }
   })
 });
 

@@ -1,13 +1,13 @@
 .features{
-    min-height : 800px;
-    max-height : 800px;
+    min-height : 635px;
+    max-height : 635px;
     overflow-y : scroll;
     display : none;
 }
 
 .features1{
-    min-height : 765px;
-    max-height : 765px;
+    min-height : 600px;
+    max-height : 600px;
     overflow-y : scroll;
     margin-bottom : 1px;
     /*display : none;*/
@@ -24,12 +24,8 @@
     margin-bottom : 6px;
 }
 
-.features-chatHis{
+.features-hide{
     display:none;
-}
-
-.feature-register{
-    display : none;
 }
 
 input{
