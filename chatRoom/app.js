@@ -24,8 +24,17 @@ io.on('connection', function(client){
     //before Broadcast , get the nickname of the client
     var nickname = client.nickname;
     var d = new Date();
+    /*Debug for Date formate*/
+    var year = d.getFullYear();
+    var month = d.getMonth();
+    var date = d.getDate();
+    var hour = d.getHours();
+    var minutes = d.getMinutes();
+    if(minutes < 10)minutes = "0" + minutes;
+    console.log("Current Mesaage 's time:"+month+"."+date+"."+year+" "+hour+":"+minutes);
+    var timeStamp = month+"."+date+"."+year+" "+hour+":"+minutes;
     
-    var message = JSON.stringify({timeStamp: d.toUTCString(), name: nickname, data: data});
+    var message = JSON.stringify({timeStamp: timeStamp, name: nickname, data: data});
     //Broadcast with the name and message
     client.broadcast.emit('message', message/*nickname + ": "+ data*/);// broadcast message to all other(注意不包括发送的那个) clients connected
     client.emit('message', message/*nickname + ": " + data*/);// send the same message back to current client,
@@ -161,7 +170,7 @@ var logIn = function(userInfo, client){ //A Chatter Log Into the ChatRoom
     
         redisClient.lrange('messages', 0, -1, function(err, messages){
           //First fetching all of the list items in 'messages' list
-          //messages = messages.reverse(); //使聊天信息 emitted in the correct Order
+          messages = messages.reverse(); //使聊天信息 emitted in the correct Order
           messages.forEach(function(message){
           //iterate through each of the messages stored in the server ,
           //emit to that clien just joined

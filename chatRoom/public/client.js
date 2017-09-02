@@ -19,18 +19,18 @@ var socket = io.connect('http://localhost:8080'); //connect to our Socket.IO ser
         
         socket.on('logIn', function(name){
                   $('#join_form').remove();
-                  $('.features').slideDown();
-                  $('.features1').slideDown();
-                  //$('.features2').fadeIn();
+                  $('.features').fadeIn();
+                  //$('.features1').slideDown();
+                  $('#chat_column').fadeIn();
                   $('#status').html('Log into ChatRoom');
                   });
         socket.on('message', function(data){ //Listen for that 'message' event
-                  alert('Get Message from Broadcast');
+                  //alert('Get Message from Broadcast');
                   insertMessage(data); //Insert Message into the chatRoom
                   });
 
         socket.on('messageHis', function(data){ //Listen for that 'message' event
-          alert('Get History Messages');
+          //alert('Get History Messages');
           insertMessageHis(data); //Insert Message into the chatRoom
           });
 
@@ -52,7 +52,7 @@ var socket = io.connect('http://localhost:8080'); //connect to our Socket.IO ser
     
         $('#chat_form').on('click', '#sendBtn', function(event){ //Hit Submit to send message
                                event.preventDefault();
-                               alert('Submit Hit!!!');
+                               //alert('Submit Hit!!!');
                                var message = $('#chat_input').val(); //grab the Message from message input Box
                                socket.emit('message', message); //Emit the message event on the Server
                                //***先假设Server Side 批准该Message***//
@@ -61,6 +61,7 @@ var socket = io.connect('http://localhost:8080'); //connect to our Socket.IO ser
         $('#quitChat').on('click', function(event){
                           event.preventDefault();
                           alert('QuitChatRoom!');
+                          $('#status').html('Disconnected to Server');
                           socket.disconnect(true);
         });
 
@@ -101,27 +102,45 @@ var socket = io.connect('http://localhost:8080'); //connect to our Socket.IO ser
          */
         function insertMessage(data){
             message = JSON.parse(data); //return it into JSON object(timeStamp, name and data properties)
-            var messageLi = $('<a href="#" class="list-group-item features2"></a>');
+           /* var messageLi = $('<a href="#" class="list-group-item features2"></a>');
             //features2 control the style of each message Box
-            $('<h4 class="list-group-item-heading">'+message.timeStamp+'</h4>').appendTo(messageLi);
+            $('<h6 class="list-group-item-heading">'+message.timeStamp+'</h6>').appendTo(messageLi);
             $('<p class="list-group-item-text">'+message.name+": "+message.data+'</p>').appendTo(messageLi);
+            $('#message_list').append(messageLi);
+            */
+            var messageLi = $('<a href="#" class="list-group-item features2"></a>');
+            var headDiv0 = $('<div class="list-group-item-heading col-sm-4 features-mesHead"></div>');
+            var headDiv1 = $('<div class="list-group-item-heading col-sm-4 col-sm-offset-4 features-mesHead"></div>');
+            //features2 control the style of each message Box
+            $('<h5 class="text-left">'+message.name+'</h6>').appendTo(headDiv0);
+            $('<h6 class="text-right">'+message.timeStamp+'</h6>').appendTo(headDiv1);
+            headDiv0.appendTo(messageLi);
+            headDiv1.appendTo(messageLi);
+            $('<p class="list-group-item-text">'+message.data+'</p>').appendTo(messageLi);
             $('#message_list').append(messageLi);
         }
 
 function insertMessageHis(data){ //Insert chat History
     message = JSON.parse(data); //return it into JSON object(timeStamp, name and data properties)
     var messageLi = $('<a href="#" class="list-group-item features2"></a>');
+    var headDiv0 = $('<div class="list-group-item-heading col-sm-4 features-mesHead"></div>');
+    var headDiv1 = $('<div class="list-group-item-heading col-sm-4 col-sm-offset-4 features-mesHead"></div>');
     //features2 control the style of each message Box
-    $('<h4 class="list-group-item-heading">'+message.timeStamp+'</h4>').appendTo(messageLi);
-    $('<p class="list-group-item-text">'+message.name+": "+message.data+'</p>').appendTo(messageLi);
+    $('<h5 class="text-left">'+message.name+'</h6>').appendTo(headDiv0);
+    $('<h6 class="text-right">'+message.timeStamp+'</h6>').appendTo(headDiv1);
+    headDiv0.appendTo(messageLi);
+    headDiv1.appendTo(messageLi);
+    $('<p class="list-group-item-text">'+message.data+'</p>').appendTo(messageLi);
     $('#messageHis_list').append(messageLi);
 }
 
     function insertChatter(name){
         //var chatter = $('<li>'+ name +'</li>').data('name', name);
         var chatter = $('<li></li>');
-        $('<h3>'+name+'</h3>').appendTo(chatter);
+        //var headDiv = $('<div class="well"></div>');
+        $('<h4 class="lead">'+name+'</h4>').appendTo(chatter);
         chatter.attr('id', name);
+        //headDiv.append(chatter);
         $('.chatter_list').append(chatter);
     }
     function join(){
@@ -129,7 +148,7 @@ function insertMessageHis(data){ //Insert chat History
             $('#join_btn').on('click', function(event){ //Hit Submit to send message
                                    event.preventDefault();
                                    var form = $(this).closest('#join_form');
-                                   alert('Join_Form Submit Hit!!!');
+                                   //alert('Join_Form Submit Hit!!!');
                                    var userName = $('#user_name').val();
                                    var userPsw = $('#user_psw').val();
                                    //alert(userName +" "+ userPsw);

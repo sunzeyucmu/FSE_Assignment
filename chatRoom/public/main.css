@@ -10,7 +10,14 @@
     max-height : 765px;
     overflow-y : scroll;
     margin-bottom : 1px;
-    display : none;
+    /*display : none;*/
+}
+
+
+.features-mesHead{
+    height:40px;
+    padding-left: 0px;
+    padding-right:0px;
 }
 
 .features2{

@@ -8,7 +8,14 @@
 </head>
 <body>
     <div class='container'>
-    <h1 id='status' class= 'col-sm-12 text-center'></h1>
+    <div class='row'>
+        <div class = 'col-sm-3'>
+            <button id= 'quitChat' class='btn btn-danger btn-lg' type='button'>Exit ChatRoom</button>
+        </div>
+        <div class='col-sm-8 col-sm-offset-1 text-left'>
+            <h1 id='status' class= 'lead'></h1>
+        </div>
+    </div>
     <div class='row'>
         <div class='col-sm-3 col-xs-3 features'>
             <div class="panel panel-info features">
@@ -21,7 +28,7 @@
                 </div>
             </div>
         </div>
-        <div class= 'col-sm-8 col-sm-offset-1 col-xs-8 col-xs-offset-1'>
+        <div id='chat_column' class= 'col-sm-8 col-sm-offset-1 col-xs-8 col-xs-offset-1 features-chatHis'>
             <div class="panel panel-info features1">
                 <div class="panel-heading">
                     <h3 class="panel-title">Messages</h3>
@@ -31,19 +38,29 @@
                     </div>
                     <a href='#' id='show_chathis' class='text-center'>Show Chat History</a>
                     <div id='message_list' class='list-group'>
-                        <!--<a href='#' id='show_chathis' class='list-group-item text-center'>Show Chat History</a>-->
+                        
+                            <!--<a href="#" class="list-group-item">
+                                    <div class='list-group-item-heading col-sm-4 features-mesHead'>
+                                    <h5 class='text-left'>List group item heading</h5>
+                                    </div>
+                                    <div class='list-group-item-heading col-sm-4 col-sm-offset-4 features-mesHead text-right'>
+                                    <h6 class=''>List group item heading1</h6>
+                                    </div>
+                                <p class="list-group-item-text">Fucker: HeHeHe</p>
+                            </a>-->
+                        
                     </div>
                 </div>
             </div>
             <div id='chat_form' class="input-group">
                 <input id='chat_input' type="text" class="form-control" placeholder="Type your message">
                 <span class="input-group-btn">
-                    <button id='sendBtn' class="btn btn-default" type="button">Go!</button>
+                    <button id='sendBtn' class="btn btn-default" type="button">Send</button>
                 </span>
             </div><!-- /input-group -->
         </div>
     </div>
-    <button id= 'quitChat' class='btn btn-danger' type='button'>Quit ChatRoom</button>
+    <!--<button id= 'quitChat' class='btn btn-danger' type='button'>Quit ChatRoom</button>
             <form id='join_form' class='feature-input'>
                 <legend>New Block</legend>
                 <!--<div class='row form-group'>
@@ -70,6 +87,7 @@
                         <input id="psw_confirm" type="password" class="form-control" placeholder="Enter Your PassWord Again" aria-describedby="basic-addon3">
                     </div>
                 </div>-->
+        <form id='join_form' class='feature-input'>
                 <div class='row form-group'>
                     <div class="col-sm-4 col-sm-offset-4">
                         <input id="user_name" type="text" class="input_block" placeholder="User Name">
