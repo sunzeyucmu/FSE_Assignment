@@ -11,13 +11,6 @@ var redisClient = redis.createClient(); //Create our Redis client
 io.on('connection', function(client){
   //listen for 'connection' event inside Socket.IO
   console.log('Client connected!'); //
-  //client.emit('message', {hello: 'world'});//emit 'message' event on our clien, which is the browsers!
-  //Let server listen for 'message' event
-  /*
-  setTimeout(function(){
-    console.log("Oh Connection Timeout");
-    client.disconnect(true);
-  }, 50000);*/
   
   client.on('message', function(data){//监听客户发送的 Message
     console.log(data); //log out the message sent by client
@@ -30,7 +23,7 @@ io.on('connection', function(client){
     var date = (d.getDate() < 10) ? "0"+d.getDate() : d.getDate();
     var hour = d.getHours();
     var minutes = (d.getMinutes() < 10) ? "0"+d.getMinutes() : d.getMinutes();
-    //if(minutes < 10)minutes = "0" + minutes;
+    
     console.log("Current Mesaage 's time:"+month+"."+date+"."+year+" "+hour+":"+minutes);
     var timeStamp = month+"."+date+"."+year+" "+hour+":"+minutes;
     
@@ -43,7 +36,6 @@ io.on('connection', function(client){
   });
   
   client.on('join', function(userInfo){//Somebody calls join (join the chatRoom)
-    //asume they're going to send in a Name
     console.log(userInfo.name + " " + userInfo.psw + " " + userInfo.option);
     //client.broadcast.emit('addChatter', userInfo.name); //Notify other clients a chatter has joined
     var info = JSON.stringify(userInfo);
@@ -95,6 +87,12 @@ io.on('connection', function(client){
       redisClient.srem('onlineUsers', nickname); //Remove them from our Redis set
     }
   })
+  /*
+  setTimeout(function(){
+    console.log("Oh Connection Timeout");
+    client.disconnect(true);
+  }, 50000);
+  */
 });
 
 app.use(express.static('public')); //static middleware serving files from public folder
@@ -109,6 +107,7 @@ app.get('/'//root route,function(req, res){
 
 server.listen(8080); //Get server listen on port 8080
 
+/*assitant functions*/
 var storeMessage = function(message/*name, data*/){
  // var d = new Date();
   //var message = JSON.stringify({timestamp: d.toUTCString, name: name, data: data});
